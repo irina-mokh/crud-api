@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 4000;
 
 const { get, post, put, del } = Methods;
 
-const server = createServer(async (req, res) => {
+export const server = createServer(async (req, res) => {
 
 	const {url, method} = req;
 	

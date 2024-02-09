@@ -1,7 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { RequestHandler, User, UserData } from '../types.js';
 import { userDB } from '../models/userModel.js';
-import { CODES, user1 } from '../consts.js';
+import { CODES } from '../consts.js';
 import { getReqBody, isValidUser, sendRes } from '../helpers.js';
 import { validate } from 'uuid';
 
@@ -51,7 +51,7 @@ class UserController  {
 			if (isValidUser(data)) {
 				if (await userDB.hasUser(id)) {
 					const newUser = await userDB.editUser(data);
-					sendRes(res, CODES.OK, newUser);
+					sendRes(res, CODES.OK, {...newUser, id});
 				} else {
 					sendRes(res, CODES.notFound, 'User doesn\'t exist');
 				}
