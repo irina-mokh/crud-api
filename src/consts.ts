@@ -13,3 +13,8 @@ export const enum CODES {
   notFound = 404,
   serverError = 500,
 }
+export const user1 = {
+	"username": "User1",
+  "hobbies": ["camping", "guitar"],
+  "age": 25
+}

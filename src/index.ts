@@ -1,6 +1,7 @@
 import {  createServer } from 'http';
 import { userController } from './controllers/userController.js';
-import { Methods } from './consts.js';
+import { CODES, Methods } from './consts.js';
+import { sendRes } from './helpers.js';
 
 const PORT = process.env.PORT || 4000;
 
@@ -10,32 +11,44 @@ const server = createServer(async (req, res) => {
 
 	const {url, method} = req;
 	
-	if(url?.startsWith('/api/users')) {
-		switch (method) {
-			// GET
-			case (get):
-				if (url.length > 11) {
-					userController.getById(req, res);
-				} else {
-					userController.getAll(req, res);
-				}
-				break;
-			// POST
-			case (post):
-				// userController.getAll();
-				break;
-			// PUT
-			case (put):
-				// userController.getAll();
-				break;
-			// DELETE
-			case (del):
-				// userController.getAll();
-				break;
-			default:
-		}	
-	} else {
-		res.end("HI!");
+	process.on('uncaughtException', function(err) {
+		res.statusCode = CODES.serverError;
+		res.end(`Some server error: ${err.message}`);
+	});
+
+	try {
+		if(url?.startsWith('/api/users')) {
+			switch (method) {
+				// GET
+				case (get):
+					if (url.length > 11) {
+						userController.getById(req, res);
+					} else {
+						userController.getAll(req, res);
+					}
+					break;
+				// POST
+				case (post):
+					userController.create(req, res);
+					break;
+				// PUT
+				case (put):
+					userController.edit(req, res);
+					break;
+				// DELETE
+				case (del):
+					userController.delete(req, res);
+					break;
+				default:
+			}	
+		} else {
+			sendRes(res, CODES.notFound, "Wrong endpoint. Check your request url");
+		}
+	} catch (err) {
+		if (err instanceof Error) {
+			res.statusCode = CODES.serverError;
+			res.end(`Some server error: ${err.message}`);
+		}
 	}
 
 })
