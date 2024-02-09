@@ -16,6 +16,7 @@ class UserModel {
 	async getUser ( id: string) {
 		return users.filter( user => user.id === id)[0];
 	}
+	
 	async createUser ( data : UserData) {
 		const newUser = {
 			...data,

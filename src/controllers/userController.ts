@@ -30,7 +30,6 @@ class UserController  {
 	}
 
 	create: RequestHandler = async (req, res) => {
-		
 		const data: UserData = await getReqBody(req);
 		if (isValidUser(data)) {
 			const newUser = await userDB.createUser(data);
@@ -38,7 +37,6 @@ class UserController  {
 		} else {
 			sendRes(res, CODES.invalid, 'Invalid user data');
 		}
-
 	}
 
 	edit: RequestHandler = async (req, res) => {

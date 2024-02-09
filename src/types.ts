@@ -10,6 +10,5 @@ export interface User extends UserData{
 	id: string;
 }
 
-
 export type RequestHandler = (req: IncomingMessage, res: ServerResponse<IncomingMessage>) => void;
 

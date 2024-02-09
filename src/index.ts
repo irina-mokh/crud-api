@@ -8,7 +8,6 @@ const PORT = process.env.PORT || 4000;
 const { get, post, put, del } = Methods;
 
 export const server = createServer(async (req, res) => {
-
 	const {url, method} = req;
 	
 	process.on('uncaughtException', function(err) {

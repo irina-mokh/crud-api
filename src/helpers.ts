@@ -25,6 +25,5 @@ export async function getReqBody<T>(request: IncomingMessage): Promise<T> {
     const res: unknown[] = [];
     request.on("data", (data: UserData | User) => res.push(data));
     request.on("end", () => resolve(res.length ? JSON.parse(res.toString()) : ""));
-		
   });
 }

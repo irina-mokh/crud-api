@@ -45,7 +45,6 @@ describe('Controller: valid operations', () => {
 	it('should return user by ID', async () => {
 		const response = await supertest(server).get(`${url}/${testID}`);
 			
-
 		expect(response.statusCode).toBe(200);
 		expect(response.body).toEqual(DB[0]);
 	});
@@ -87,6 +86,7 @@ describe('Controller: valid operations', () => {
 			id: testID2,
 		});
 	});
+
 	it('should return Users array', async () => {
 		const response = await supertest(server).get(url);
 
@@ -149,6 +149,7 @@ describe('Controller: invalid data', () => {
 describe('Controller: non-existent users', () => {
 	let testID: string;
 	let testUUID = uuidv4();
+	
 	it('should post user', async () => {
 		const response = await supertest(server)
 		.post(url)
