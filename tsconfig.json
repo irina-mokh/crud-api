@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es2020",                          
-    "module": "Node16",                                    
+    "target": "es2020",
+    "module": "Node16",  
     "allowJs": true,
-    "outDir": "./dist",                          
+    "outDir": "./dist",
     "rootDir": "./src",
-    "strict": true,         
+    "strict": true,
     "noImplicitAny": true,
     "esModuleInterop": true
   },

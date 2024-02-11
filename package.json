@@ -7,6 +7,7 @@
   "scripts": {
     "start:dev": "nodemon --env-file=.env src/index.ts",
     "start:prod": "tsc && node dist/index.js",
+    "start:multi": "tsc && node ./dist/loadBalancer.js ",
     "test": "jest --silent --verbose --forceExit"
   },
   "author": "irina-mokh",

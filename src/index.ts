@@ -1,4 +1,4 @@
-import {  createServer } from 'http';
+import {  IncomingMessage, ServerResponse, createServer } from 'http';
 import { userController } from './controllers/userController.js';
 import { CODES, Methods } from './consts.js';
 import { sendRes } from './helpers.js';
@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 4000;
 
 const { get, post, put, del } = Methods;
 
-export const server = createServer(async (req, res) => {
+export const requestHandler = async (req: IncomingMessage, res: ServerResponse<IncomingMessage>) => {
 	const {url, method} = req;
 	
 	process.on('uncaughtException', function(err) {
@@ -49,8 +49,9 @@ export const server = createServer(async (req, res) => {
 			res.end(`Some server error: ${err.message}`);
 		}
 	}
+}
 
-})
+export const server = createServer(requestHandler)
 
 server.listen(PORT, () => {
 	console.log(`SERVER STARTED ON PORT: ${PORT}`);
